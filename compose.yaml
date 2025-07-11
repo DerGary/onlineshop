@@ -1,0 +1,11 @@
+services:
+  # backend:
+  #   image: docker.io/library/onlineshop:0.0.1-SNAPSHOT
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=onlineshop
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=demo
+    ports:
+      - 5432:5432
