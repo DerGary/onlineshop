@@ -1,8 +1,9 @@
 package dev.gerasch.onlineshop.shoppingcart
 
-import java.util.Optional
 import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.rest.core.annotation.RepositoryRestResource
 
-interface ShoppingCartRepository : CrudRepository<ShoppingCart, Long> {
-    override fun findById(id: Long): Optional<ShoppingCart>
-}
+@RepositoryRestResource(collectionResourceRel = "shoppingcarts", path = "shoppingcarts")
+interface ShoppingCartRepository :
+        PagingAndSortingRepository<ShoppingCart, Long>, CrudRepository<ShoppingCart, Long> {}

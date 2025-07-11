@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "shopping-carts")
+@Table(name = "shoppingcarts")
 class ShoppingCart {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null
     var userId: Long? = null
