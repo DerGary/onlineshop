@@ -6,7 +6,7 @@
       "type": "shell",
       "command": "./gradlew bootJar",
       "options": {
-        "cwd": "./backend"
+        "cwd": "${workspaceFolder}/backend"
       },
       "problemMatcher": [],
       "group": {
@@ -19,7 +19,7 @@
       "type": "shell",
       "command": "./gradlew bootRun",
       "options": {
-        "cwd": "./backend"
+        "cwd": "${workspaceFolder}/backend"
       },
       "problemMatcher": []
     },
@@ -27,7 +27,7 @@
       "label": "create-migration",
       "type": "shell",
       "options": {
-        "cwd": "./backend"
+        "cwd": "${workspaceFolder}/backend"
       },
       "command": "atlas migrate diff \"${input:message}\" --env hibernate",
       "problemMatcher": []
