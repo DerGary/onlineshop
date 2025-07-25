@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "./gradlew bootJar",
+      "options": {
+        "cwd": "./backend"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "run",
+      "type": "shell",
+      "command": "./gradlew bootRun",
+      "options": {
+        "cwd": "./backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "create-migration",
+      "type": "shell",
+      "options": {
+        "cwd": "./backend"
+      },
+      "command": "atlas migrate diff \"${input:message}\" --env hibernate",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "message",
+      "type": "promptString",
+      "description": "Migration description (e.g. add users table)"
+    }
+  ]
+}
