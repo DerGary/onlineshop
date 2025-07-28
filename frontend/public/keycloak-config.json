@@ -1,0 +1,7 @@
+{
+  "config": {
+    "realm": "onlineshop",
+    "url": "http://localhost:8081",
+    "clientId": "frontend"
+  }
+}

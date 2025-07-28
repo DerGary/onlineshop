@@ -1,4 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     kotlin("jvm") version "2.2.0"
@@ -26,11 +27,13 @@ repositories { mavenCentral() }
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-rest")
   implementation("org.springframework.boot:spring-boot-starter-security")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
   implementation("org.flywaydb:flyway-core:11.10.2")
   implementation("org.flywaydb:flyway-database-postgresql")
-  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.postgresql:postgresql")
-  implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   compileOnly("org.projectlombok:lombok")
@@ -48,7 +51,12 @@ allOpen {
   annotation("jakarta.persistence.MappedSuperclass")
 }
 
-kotlin { compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") } }
+kotlin { 
+  compilerOptions { 
+    freeCompilerArgs.addAll("-Xjsr305=strict")
+    jvmTarget = JvmTarget.fromTarget("21")
+  }
+}
 
 tasks.withType<Test> { useJUnitPlatform() }
 

@@ -14,6 +14,8 @@ This will be a backend for an online shop of digital products.
 - JUnit (Test Framework)
 - VSCode (IDE)
 - [Gradle Versions Plugin](https://github.com/ben-manes/gradle-versions-plugin)
+- Keycloak (OAuth2, OpenIdConnect)
+- Angular (Frontend)
 
 ## License
 
