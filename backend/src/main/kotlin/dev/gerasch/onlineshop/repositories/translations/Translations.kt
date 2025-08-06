@@ -30,9 +30,10 @@ class TranslationMapping(
 )
 
 enum class TranslationType {
-    PRODUCT_TITLE,
-    PRODUCT_DESCRIPTION,
-    FILE_TITLE,
+        PRODUCT_TITLE,
+        PRODUCT_DESCRIPTION,
+        FILE_TITLE,
+        MEDIA_TITLE
 }
 
 @Entity

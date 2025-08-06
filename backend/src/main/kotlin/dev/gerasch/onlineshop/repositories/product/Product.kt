@@ -13,6 +13,7 @@ import jakarta.persistence.Lob
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import jakarta.persistence.Basic
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -20,6 +21,12 @@ import java.time.LocalDateTime
 @Table(name = "products")
 class Product(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
+        @OneToMany(
+                mappedBy = "product",
+                cascade = [CascadeType.ALL],
+                fetch = FetchType.EAGER,
+                targetEntity = ProductPrice::class
+        )
         var prices: List<ProductPrice> = emptyList(),
         @OneToMany(
                 mappedBy = "product",
@@ -28,18 +35,24 @@ class Product(
                 targetEntity = ProductMedia::class
         )
         var media: List<ProductMedia> = emptyList(),
+        @OneToMany(
+                mappedBy = "product",
+                cascade = [CascadeType.ALL],
+                fetch = FetchType.LAZY,
+                targetEntity = ProductFile::class
+        )
         var files: List<ProductFile> = emptyList()
+        var isBuyable: Boolean
 )
 
 @Entity
-@Table(name = "productmedia")
+@Table(name = "productMedia")
 class ProductMedia(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
         @ManyToOne @JoinColumn(name = "productId") var product: Product,
         var order: UInt,
-        var mediaName: String,
         var mediaExtension: String,
-        @Lob var data: ByteArray,
+        @Lob @Basic(fetch = FetchType.LAZY) var data: ByteArray,
 )
 
 @Entity
@@ -47,7 +60,7 @@ class ProductMedia(
 class ProductFile(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
         @ManyToOne @JoinColumn(name = "productId") var product: Product,
-        @Lob var data: ByteArray,
+        @Lob @Basic(fetch = FetchType.LAZY) var data: ByteArray,
 )
 
 @Entity
