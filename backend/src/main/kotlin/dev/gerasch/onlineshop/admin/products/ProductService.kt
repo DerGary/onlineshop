@@ -10,8 +10,13 @@ import dev.gerasch.onlineshop.repositories.product.ProductPrice
 import dev.gerasch.onlineshop.repositories.product.ProductRepository
 import dev.gerasch.onlineshop.repositories.translations.TranslationType
 import java.time.LocalDateTime
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
 
 interface IProductService {
+    fun getProduct(productId: Long): ProductDTO
+    fun getProducts(request: Pageable): Page<ProductDTO>
     fun upsertProduct(product: ProductDTO): ProductDTO
     fun deleteProduct(productId: Long)
     fun upsertMedia(
@@ -30,6 +35,18 @@ class ProductService(
         val productMediaRepo: ProductMediaRepository
         val productFileRepo: ProductFileRepository
 ) : IProductService {
+    override fun getProduct(productId: Long): ProductDTO{
+        val savedProduct = productRepo.findById(productId);
+        if(savedProduct.isEmpty()){
+            throw ProductNotFoundException("The product with id ${productId} could not be found")
+        }
+        return mapToProductDTO(savedProduct.get())
+    }
+    override fun getProducts(request: Pageable): Page<ProductDTO>{
+        var pagedProducts = productRepo.findAll(request)
+        //todo: create a paged response
+    }
+    
     override fun upsertProduct(product: ProductDTO): ProductDTO {
         val productToSave = mapToProduct(product)
         var savedProduct: Product

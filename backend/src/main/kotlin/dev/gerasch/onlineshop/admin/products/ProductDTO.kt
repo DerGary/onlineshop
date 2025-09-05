@@ -38,10 +38,7 @@ data class ProductFileDTO(
 )
 
 class RawLink(href: String) {
-        val raw: Link
-        init {
-                raw = Link(href)
-        }
+        val raw: Link = Link(href)
 }
 
 data class Link(var href: String)
